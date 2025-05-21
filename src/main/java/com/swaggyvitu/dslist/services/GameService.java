@@ -3,6 +3,7 @@ package com.swaggyvitu.dslist.services;
 import com.swaggyvitu.dslist.dto.GameDTO;
 import com.swaggyvitu.dslist.dto.GameMinDTO;
 import com.swaggyvitu.dslist.entities.Game;
+import com.swaggyvitu.dslist.projection.GameMinProjection;
 import com.swaggyvitu.dslist.repository.GameRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,10 @@ public class GameService {
         return new GameDTO(result);
     }
 
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId){
+        List<GameMinProjection> resultado = gameRepository.searchByList(listId);
+        return resultado.stream().map(x -> new GameMinDTO(x)).toList();
+    }
 
 }
