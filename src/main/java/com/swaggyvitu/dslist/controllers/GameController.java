@@ -1,8 +1,10 @@
 package com.swaggyvitu.dslist.controllers;
 
+import com.swaggyvitu.dslist.dto.GameDTO;
 import com.swaggyvitu.dslist.dto.GameMinDTO;
 import com.swaggyvitu.dslist.services.GameService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +26,14 @@ public class GameController {
         List<GameMinDTO> resultado = gameService.findAll();
         return resultado;
     }
+
+    @GetMapping(value = "/{id}")
+    public GameDTO findById(@PathVariable Long id){
+        GameDTO resultado = gameService.findById(id);
+        return resultado;
+    }
+
+
+
 
 }
